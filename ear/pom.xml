@@ -1,0 +1,135 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <groupId>com.pjug</groupId>
+    <artifactId>SeamPJUGDemo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.pjug</groupId>
+  <artifactId>ear</artifactId>
+  <packaging>ear</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>ear</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.pjug</groupId>
+  		<artifactId>ejb-jar</artifactId>
+  		<version>1.0-SNAPSHOT</version>
+  		<type>ejb</type>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.pjug</groupId>
+  		<artifactId>war</artifactId>
+  		<version>1.0-SNAPSHOT</version>
+  		<type>war</type>
+  	</dependency>
+  	<dependency>
+        <groupId>org.jboss.seam</groupId>
+        <artifactId>jboss-seam</artifactId>
+        <version>2.2.2.Final</version>
+     	<type>ejb</type>
+     	<exclusions>
+     		<exclusion>
+     			<groupId>javax.el</groupId>
+     			<artifactId>el-api</artifactId>
+     		</exclusion>
+     	</exclusions>
+    </dependency>
+    <dependency>
+    	<groupId>org.jboss.el</groupId>
+    	<artifactId>jboss-el</artifactId>
+    	<version>1.0_02.CR4</version>
+    	<type>jar</type>   
+    	<exclusions>
+     		<exclusion>
+     			<groupId>javax.el</groupId>
+     			<artifactId>el-api</artifactId>
+     		</exclusion>
+     	</exclusions> 
+    </dependency>
+  </dependencies>
+  <build>
+  	<finalName>SeamPJUGDemo</finalName>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-ear-plugin</artifactId>
+  			<version>2.4</version>
+  			<configuration>
+  				<defaultLibBundleDir>lib</defaultLibBundleDir> 
+  				<modules>
+  					<ejbModule>
+  						<groupId>com.pjug</groupId>
+  						<artifactId>ejb-jar</artifactId>
+  					</ejbModule>
+  					<webModule>
+  						<groupId>com.pjug</groupId>
+  						<artifactId>war</artifactId>
+  						<contextRoot>/SeamPJUGDemo</contextRoot>
+  					</webModule>
+  					<ejbModule>
+  						<groupId>org.jboss.seam</groupId>
+  						<artifactId>jboss-seam</artifactId>
+  					</ejbModule>
+  				</modules>  				
+  				<jboss>
+  					<version>5</version>
+  					<loader-repository>seam.jboss.org:loader=SeamPJUGDemo</loader-repository>
+  				</jboss>
+  			</configuration>
+  		</plugin>
+  <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.3</version>
+				<executions>
+					<execution>
+						<phase>verify</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<echo
+									message="Cleaning deployed applications: app=[${project.artifactId}], dir=[${com.envista.deployment.directory}]" />
+								<delete>
+									<fileset dir="${com.envista.deployment.directory}">
+										<include name="${project.artifactId}*" />
+										<exclude name="${project.build.finalName}.ear" />
+									</fileset>
+								</delete>
+								<delete includeemptydirs="true">
+									<fileset dir="${com.envista.deployment.directory}">
+										<include name="${project.artifactId}*/**" />
+									</fileset>
+								</delete>
+								<delete
+									dir="${com.envista.deployment.directory}/../exploded.properties" />
+							</tasks>
+						</configuration>
+					</execution>
+					<execution>
+						<id>install</id>
+						<phase>install</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<copy
+									file="${project.build.directory}/${project.build.finalName}.ear"
+									toDir="${com.envista.deployment.directory}" />
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<properties>
+		<com.envista.deployment.directory>/home/sachin/envista/jboss-5.1.0.GA/server/default/deploy</com.envista.deployment.directory>
+
+	</properties>
+	</project>
