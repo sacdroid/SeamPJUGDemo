@@ -93,20 +93,20 @@
 						<configuration>
 							<tasks>
 								<echo
-									message="Cleaning deployed applications: app=[${project.artifactId}], dir=[${com.envista.deployment.directory}]" />
+									message="Cleaning deployed applications: app=[${project.artifactId}], dir=[${deployment.directory}]" />
 								<delete>
-									<fileset dir="${com.envista.deployment.directory}">
+									<fileset dir="${deployment.directory}">
 										<include name="${project.artifactId}*" />
 										<exclude name="${project.build.finalName}.ear" />
 									</fileset>
 								</delete>
 								<delete includeemptydirs="true">
-									<fileset dir="${com.envista.deployment.directory}">
+									<fileset dir="${deployment.directory}">
 										<include name="${project.artifactId}*/**" />
 									</fileset>
 								</delete>
 								<delete
-									dir="${com.envista.deployment.directory}/../exploded.properties" />
+									dir="${deployment.directory}/../exploded.properties" />
 							</tasks>
 						</configuration>
 					</execution>
@@ -120,7 +120,7 @@
 							<tasks>
 								<copy
 									file="${project.build.directory}/${project.build.finalName}.ear"
-									toDir="${com.envista.deployment.directory}" />
+									toDir="${deployment.directory}" />
 							</tasks>
 						</configuration>
 					</execution>
@@ -129,7 +129,6 @@
 		</plugins>
 	</build>
 	<properties>
-		<com.envista.deployment.directory>/home/sachin/envista/jboss-5.1.0.GA/server/default/deploy</com.envista.deployment.directory>
-
+		<deployment.directory>${jboss-5.home}/server/default/deploy</deployment.directory>
 	</properties>
 	</project>

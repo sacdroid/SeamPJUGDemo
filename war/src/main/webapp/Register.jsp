@@ -17,10 +17,10 @@
 			<s:validateAll>
 				<h:panelGrid columns="2">
 				First Name :
-						<h:inputText value="#{person.firstName}" required="true" />
+						<h:inputText label="First Name" value="#{person.firstName}" required="true" />
 
 				Last Name: 
-						<h:inputText value="#{person.lastName}" required="true" />
+						<h:inputText   label="Last Name"  value="#{person.lastName}" required="true" />
 
 				</h:panelGrid>
 				<h:commandButton value="Register"

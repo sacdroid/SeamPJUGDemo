@@ -12,7 +12,7 @@
 </head>
 <body>
 	<f:view>
-	Welcome,  Registration Number:  <h:outputText
+	Welcome, Your Registration Number:  <h:outputText
 			value="#{person.registrationNumber}" />
 	</f:view>
 </body>

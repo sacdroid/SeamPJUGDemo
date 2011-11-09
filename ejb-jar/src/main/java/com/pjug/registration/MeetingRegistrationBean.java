@@ -2,7 +2,6 @@ package com.pjug.registration;
 
 import javax.ejb.Stateless;
 
-import org.hibernate.validator.Valid;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
@@ -15,7 +14,6 @@ public class MeetingRegistrationBean implements MeetingRegistration {
 
 	@In
 	@Out
-	@Valid
 	private Person person;
 
 	@Logger
@@ -23,7 +21,7 @@ public class MeetingRegistrationBean implements MeetingRegistration {
 
 	public String register() {
 		person.setRegistrationNumber(System.currentTimeMillis() + "");
-		log.info("registered pjug user %s", person.getFirstName());
+		log.info("Registered PUJG member %s", person.getFirstName());
 		return "/registered.seam";
 
 	}
