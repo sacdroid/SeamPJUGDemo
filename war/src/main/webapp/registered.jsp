@@ -12,8 +12,16 @@
 </head>
 <body>
 	<f:view>
-	Welcome, Your Registration Number:  <h:outputText
-			value="#{person.registrationNumber}" />
+		New Member added with registration Number:  <h:outputText
+			value="#{member.registrationNumber}" />
+    	<div />
+		<div />
+		<s:link id="memberRegister" value="Add Member"
+				action="#{meetingRegistration.createMember}" />
+			
+		<div />
+		<s:link id="memberList" value="Member List" view="/pjugmembers.seam" />
 	</f:view>
+
 </body>
 </html>

@@ -17,14 +17,18 @@
 			<s:validateAll>
 				<h:panelGrid columns="2">
 				First Name :
-						<h:inputText label="First Name" value="#{person.firstName}" required="true" />
+						<h:inputText label="First Name" value="#{member.firstName}"
+						required="true" />
 
 				Last Name: 
-						<h:inputText   label="Last Name"  value="#{person.lastName}" required="true" />
+						<h:inputText label="Last Name" value="#{member.lastName}"
+						required="true" />
 
 				</h:panelGrid>
 				<h:commandButton value="Register"
 					action="#{meetingRegistration.register}" />
+				<h:commandButton value="Cancel"
+					action="#{meetingRegistration.cancel}" immediate="true" />
 			</s:validateAll>
 		</h:form>
 	</f:view>
